@@ -6,26 +6,13 @@ import * as jwt from 'jsonwebtoken'; // used to create, sign, and verify tokens
 @Injectable()
 export class AuthService {
 
-     select() {        
-        return db.select('*').from('producto');
+
+      async login(username) {        
+        console.log('username', username);
+        return await db.select('*').from('users').where('username', username).first();
       }
 
-      async search(id) {
-        //return db('cliente').where('id_cliente', id).first();
-        return await db.select('*').from('cliente').where('id_cliente', id).first();
-      }
 
-      insert(data) {
-        return db('cliente').insert(data, '*');
-      }
-
-      update(id, data) {
-        return db('cliente').where('id_cliente', id).update(data, '*');
-      }
-
-      delete(id) {
-        return db('cliente').where('id_cliente', id).del();
-      }
 
 
 }

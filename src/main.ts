@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+import { StaticModule } from './static/static.module';
+
 import * as csurf from 'csurf';
 
 import * as rateLimit from 'express-rate-limit';
@@ -11,8 +13,11 @@ import * as compression from 'compression';
 
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-
 import * as cookieParser from 'cookie-parser';
+
+//import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+
+//import { NestExpressApplication } from '@nestjs/platform-express';
 
 
 async function bootstrap() {
@@ -58,8 +63,22 @@ async function bootstrap() {
     .addTag('api')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('doc', app, document);
+
+  app.setGlobalPrefix('api/v1/');
 
   await app.listen(8000);
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
+
+
+  /**
+   * MICROSERVICE
+   */
+
+  const staticService = await NestFactory.create(StaticModule,  {  });  
+  //await static.listen(7000);
+  await staticService.listen(7000);
+
 }
 bootstrap();
