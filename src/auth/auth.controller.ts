@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Res, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { message, token } from '../utils';
+import {message, encrypt, token} from '../utils'
 
 @Controller('auth')
 export class AuthController {
@@ -10,6 +10,7 @@ export class AuthController {
 
 
     @Get()    
+    
     setLogin(@Res() res, @Query() query, @Param() param): any {
         
         this.AuthService.login(query.username).then(reponse => {

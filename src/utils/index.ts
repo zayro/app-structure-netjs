@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
 
+
 /**
  * encrypt data of type string
  * @param {string} data to encrypt
@@ -72,7 +73,7 @@ export function token(data: object, expiresIn?: string) {
  * @param {string} tokens
  * @returns {boolean} returns according to the validation true or false
  */
-export async function check(tokens: string) {
+export async function checkToken(tokens: string) {
 
     const secret = process.env.JWT_KEY;
 

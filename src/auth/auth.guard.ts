@@ -6,6 +6,7 @@ import {
     HttpStatus,
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import {checkToken} from '../utils'
 
 @Injectable()
 export class AuthGuard implements CanActivate {

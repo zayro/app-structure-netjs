@@ -5,8 +5,11 @@ import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 
+import { ConfigModule } from '@nestjs/config';
+import configuration from './conf/configuration';
+
 @Module({
-  imports: [AuthModule],
+  imports: [ConfigModule.forRoot({load: [configuration]}), AuthModule],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService],
 })
